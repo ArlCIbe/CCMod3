@@ -10,6 +10,7 @@ Fetch Interfaces
 - provides a JS interface for accessing and manipulating parts of the HTTP pipeline (requests and responses)
 - returns a Promise that can be used to retrieve the response to the request. 
      [as soon as the server responds with headers even if the server response is an HTTP error status. You can also optionally pass in an init options object as the second argument.]
+- uses body property (has to be stringified)
 
 promise - represents the eventual completion (or failure) of an asynchronous operation and its resulting value 
 
@@ -23,8 +24,7 @@ fetch('path-to-the-resource-to-be-fetched')
   });
 ```
 
-Headers
-Represents response/request headers, allowing you to query them and take different actions depending on the results.
+`Headers()` - Fetch API interface that alllows you to query HTTP request and response headers and take different actions depending on the results.
 
 `Request()` - Fetch API interfeace that represents a resource request. 
 
@@ -35,8 +35,10 @@ Represents response/request headers, allowing you to query them and take differe
 worker context - functionality not seen by the user, goes on in the background
 
 Axios - an isomorphic,
-    [promise-based HTTP Client for node.js and the browser. On the server-side it uses the native node.js http module, while on the client (browser) it uses XMLHttpRequests.]
-    [a Javascript library used to make HTTP requests from node.js or XMLHttpRequests from the browser and it supports the Promise API that is native to JS ES6. It can be used intercept HTTP requests and responses and enables client-side protection against XSRF. It also has the ability to cancel requests.]
+  [promise-based HTTP Client for node.js and the browser. On the server-side it uses the native node.js http module, while on the client (browser) it uses XMLHttpRequests.]
+  [a Javascript library used to make HTTP requests from node.js or XMLHttpRequests from the browser and it supports the Promise API that is native to JS ES6. It can be used intercept HTTP requests and responses and enables client-side protection against XSRF. It also has the ability to cancel requests.]
+  - uses data property (contains the object)
+  - built-in XSRF protection.
 
 isomorphic - can run in the browser and nodejs with the same codebase. 
 
@@ -69,3 +71,36 @@ Progress capturing for browsers and node.js with extra info (speed rate, remaini
 Setting bandwidth limits for node.js
 Compatible with spec-compliant FormData and Blob (including node.js)
 Client side support for protecting against XSRF
+
+
+Axios request is ok when status is 200 and statusText is ‘OK’.
+
+Fetch request is ok when response object contains the ok property.
+
+Axios performs automatic transforms of JSON data.
+
+Fetch is a two-step process when handling JSON data- first, to make the actual request; second, to call the .json() method on the response.
+
+Axios allows cancelling request and request timeout.
+
+Fetch does not.
+
+Axios has the ability to intercept HTTP requests.
+
+Fetch, by default, doesn’t provide a way to intercept requests.
+
+Axios has built-in support for download progress.
+
+Fetch does not support upload progress.
+
+Axios has wide browser support.
+
+Fetch only supports Chrome 42+, Firefox 39+, Edge 14+, and Safari 10.1+ (This is known as Backward Compatibility).
+
+Axios “GET” call ignores data content
+
+Fetch “GET” call can have body content
+
+
+wrapping something inside curly braces in html injects a JS value
+w/o a state variable, the page won't uypdate
